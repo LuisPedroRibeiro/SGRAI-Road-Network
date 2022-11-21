@@ -13,7 +13,7 @@ const cameraParameters = {
     far : 1000
 };
 const camera = new THREE.PerspectiveCamera(cameraParameters.fieldOfView, cameraParameters.aspectRatio, cameraParameters.near, cameraParameters.far);
-camera.position.set(0, -15, 15);
+camera.position.set(0, -2, 2);
 camera.rotation.x = cameraParameters.fieldOfView * (Math.PI / 180);
 scene.add(camera);
 
@@ -24,38 +24,36 @@ scene.add(camera);
     The size of the terrain will be set relative to the set of points stated on the Project proposition.
 */
 const terrenoParameters = {
-    tamanho : 8,
+    tamanho : 1,
     segmentos : 64,
     x : 0,
     y : 0,
+    z : 0,
+    cor : 0x228B22
+};
+const terrenoParameters1 = {
+    tamanho : 8,
+    segmentos : 64,
+    x : 47,
+    y : 6,
+    z : 9,
     cor : 0x228B22
 };
 const rotundaParameters = {
-    raioInterior : 4,
-    raioExterior : 2,
+    raioInterior : terrenoParameters.tamanho / 2,
+    raioExterior : terrenoParameters.tamanho / 4,
     segmentos : 120,
     cor : 0x36454F
 };
-const rotundaLinhasExterioresParameters = {
-    raioInterior : rotundaParameters.raioInterior,
-    raioExterior : rotundaParameters.raioInterior - 0.1,
-    segmentos : rotundaParameters.segmentos,
-    cor : 0xFFFFFF
-};
-const rotundaLinhasInterioresParameters = {
-    raioInterior : rotundaParameters.raioExterior + 0.1,
-    raioExterior : rotundaParameters.raioExterior,
-    segmentos : rotundaParameters.segmentos,
-    cor : 0xFFFFFF
-};
 const estradaParameters = {
-    largura : 1,
+    largura : 0.25,
     comprimento : terrenoParameters.tamanho - rotundaParameters.raioExterior,
     cor : 0x36454F
 };
-const terrain = new Terrain(terrenoParameters, rotundaParameters, rotundaLinhasExterioresParameters, 
-    rotundaLinhasInterioresParameters, estradaParameters);
+const terrain = new Terrain(terrenoParameters, rotundaParameters, estradaParameters);
+const terrain1 = new Terrain(terrenoParameters1, rotundaParameters, estradaParameters);
 scene.add(terrain.object);
+scene.add(terrain1.object);
 
 
 
