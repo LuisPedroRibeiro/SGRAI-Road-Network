@@ -13,11 +13,13 @@ const cameraParameters = {
     far : 1000
 };
 const camera = new THREE.PerspectiveCamera(cameraParameters.fieldOfView, cameraParameters.aspectRatio, cameraParameters.near, cameraParameters.far);
-camera.position.set(0, -2, 2);
+camera.position.set(0, -20, 20);
 camera.rotation.x = cameraParameters.fieldOfView * (Math.PI / 180);
 scene.add(camera);
 
-
+//TODO: Criar os terrenos pelo uso da lista recebida da Gestão de Armazéns
+//TODO: Calcular o número de ligações através do custo
+//TODO: Calcular a orientação a ser utilizada na ligação
 
 /*
     The color being used is Forest Green, to simulate a very simple grass "texture" on the terrain.
@@ -32,11 +34,27 @@ const terrenoParameters = {
     cor : 0x228B22
 };
 const terrenoParameters1 = {
-    tamanho : 8,
+    tamanho : 1,
     segmentos : 64,
-    x : 47,
-    y : 6,
-    z : 9,
+    x : 2,
+    y : 2,
+    z : 0,
+    cor : 0x228B22
+};
+const terrenoParameters2 = {
+    tamanho : 1,
+    segmentos : 64,
+    x : 7,
+    y : 10,
+    z : 4,
+    cor : 0x228B22
+};
+const terrenoParameters3 = {
+    tamanho : 1,
+    segmentos : 64,
+    x : 5,
+    y : -5,
+    z : 0,
     cor : 0x228B22
 };
 const rotundaParameters = {
@@ -52,8 +70,12 @@ const estradaParameters = {
 };
 const terrain = new Terrain(terrenoParameters, rotundaParameters, estradaParameters);
 const terrain1 = new Terrain(terrenoParameters1, rotundaParameters, estradaParameters);
+const terrain2 = new Terrain(terrenoParameters2, rotundaParameters, estradaParameters);
+const terrain3 = new Terrain(terrenoParameters3, rotundaParameters, estradaParameters);
 scene.add(terrain.object);
 scene.add(terrain1.object);
+scene.add(terrain2.object);
+scene.add(terrain3.object);
 
 
 
