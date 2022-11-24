@@ -19,10 +19,10 @@ export default class Terreno {
     }
 
     criarEstradas(terrenoParameters, estradaParameters, rotundaParameters) {
-        for(let i = 0; i < 8; i ++) {
+        for(let i = 0; i < 1; i ++) {
             let x0 = 0.0, y0 = 0.0, orientacao;
             if(i == 0) {
-                orientacao = 0;
+                orientacao = THREE.MathUtils.radToDeg(2.468640924607367);
             } else if(i == 1) {
                 orientacao = -90;
             } else if(i == 2) {
@@ -38,7 +38,7 @@ export default class Terreno {
             } else if(i == 7) {
                 orientacao = 135;
             }
-            const estrada = new Estrada(estradaParameters, rotundaParameters, x0, y0, orientacao);
+            const estrada = new Estrada(estradaParameters, rotundaParameters, 0.0, 0.0, orientacao);
             this.object.add(estrada.object);
         }
     }

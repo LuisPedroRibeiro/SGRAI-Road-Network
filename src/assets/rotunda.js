@@ -15,6 +15,9 @@ export default class Rotunda {
         this.object = new THREE.Mesh(rotundaGeometry, rotundaMaterial);
     }
 
+
+    
+
     criarLinhasExteriores(rotundaLinhasExterioresParameters) {
         const rotundaLinhasExterioresGeometry = new THREE.RingGeometry(rotundaLinhasExterioresParameters.raioInterior, 
             rotundaLinhasExterioresParameters.raioExterior, rotundaLinhasExterioresParameters.segmentos);
