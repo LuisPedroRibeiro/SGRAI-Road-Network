@@ -19,7 +19,6 @@ scene.add(camera);
 
 //TODO: Criar os terrenos pelo uso da lista recebida da Gestão de Armazéns
 //TODO: Calcular o número de ligações através do custo
-//TODO: Calcular a orientação a ser utilizada na ligação
 
 /*
     The color being used is Forest Green, to simulate a very simple grass "texture" on the terrain.
@@ -58,28 +57,25 @@ scene.add(terreno.object);
 scene.add(terreno1.object);
 
 
+const calc = Math.pow(terrenoParameters1.x - terrenoParameters.x, 2) + Math.pow(terrenoParameters1.y - terrenoParameters.y, 2);
+const d = Math.sqrt(calc) - terrenoParameters.tamanho - terrenoParameters1.tamanho;
+const h = terrenoParameters1.z - terrenoParameters.z;
+const dd = Math.sqrt(Math.pow(d, 2) + Math.pow(h, 2)); 
+const a = Math.atan2((terrenoParameters1.y - terrenoParameters.y), (terrenoParameters1.x - terrenoParameters.x))
+const i = Math.atan(h / d);
+console.log(THREE.MathUtils.degToRad(90) + a);
+const rampaGeometry = new THREE.PlaneGeometry(estradaParameters.largura, dd);
+const rampaMaterial = new THREE.MeshBasicMaterial({ color : 0xFFFFFF, side : THREE.DoubleSide });
+const p = new THREE.Mesh(rampaGeometry, rampaMaterial);
 
-const comprimentoXY = Math.sqrt(Math.pow(terrenoParameters1.x - terrenoParameters.x, 2) + 
-    Math.pow(terrenoParameters1.y - terrenoParameters.y, 2)) - (terrenoParameters.tamanho) - (terrenoParameters1.tamanho);
-const desnivel = terrenoParameters1.z - terrenoParameters.z;
-const comprimento = Math.sqrt(Math.pow(comprimentoXY, 2) + Math.pow(desnivel, 2));
-const inclinacao = Math.atan(desnivel / comprimentoXY);
-const orientacao = Math.atan2((terrenoParameters1.y - terrenoParameters.y), (terrenoParameters1.x - terrenoParameters.x));
-const rampaGeometry = new THREE.PlaneGeometry(estradaParameters.largura, comprimento);
-const rampaMaterial = new THREE.MeshBasicMaterial({ color : estradaParameters.cor, side : THREE.DoubleSide });
-rampaMaterial.depthTest = false;
-const rampa = new THREE.Mesh(rampaGeometry, rampaMaterial);
-rampa.position.x = (terrenoParameters1.x + terrenoParameters.x) / 2;
-rampa.position.y = (terrenoParameters1.y + terrenoParameters.y) / 2;
-rampa.position.z = (terrenoParameters1.z + terrenoParameters.z) / 2;
-rampa.rotateZ(-orientacao);
-//rampa.rotateY(inclinacao);
-scene.add(rampa);
-console.log("A(" + terrenoParameters.x + "; " + terrenoParameters.y + "; " + terrenoParameters.z + ")");
-console.log("B(" + terrenoParameters1.x + "; " + terrenoParameters1.y + "; " + terrenoParameters1.z + ")");
-console.log("Comprimento xOy: " + comprimentoXY);
-console.log("Comprimento: " + comprimento);
-console.log("Orientação: " + orientacao);
+p.position.x = (terrenoParameters1.x + terrenoParameters.x) / 2;
+p.position.y = (terrenoParameters1.y + terrenoParameters.y) / 2;
+p.position.z = (terrenoParameters1.z + terrenoParameters.z) / 2;
+
+//p.rotateZ(THREE.MathUtils.degToRad(90));
+p.rotateZ(THREE.MathUtils.degToRad(90) + a);
+p.rotateX(-i);
+scene.add(p);
 
 
 

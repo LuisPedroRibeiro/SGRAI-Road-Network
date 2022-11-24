@@ -11,7 +11,7 @@ const cameraParameters = {
     far : 1000
 };
 const camera = new THREE.PerspectiveCamera(cameraParameters.fieldOfView, cameraParameters.aspectRatio, cameraParameters.near, cameraParameters.far);
-camera.position.set(0, -20, 20);
+camera.position.set(0, -150, 100);
 camera.rotation.x = cameraParameters.fieldOfView * (Math.PI / 180);
 camera.up.set(0, 0, 1);
 scene.add(camera);
@@ -21,24 +21,25 @@ scene.add(camera);
 const g = new THREE.CircleGeometry(1, 64);
 const m1 = new THREE.MeshBasicMaterial({ color : 0x00FF00 });
 const c1 = new THREE.Mesh(g, m1);
-c1.position.x = -5;
-c1.position.y = -2;
-c1.position.z = 0;
+c1.position.x = -50;
+c1.position.y = -42.6618;
+c1.position.z = 15.625;
 scene.add(c1);
 
 const m2 = new THREE.MeshBasicMaterial({ color : 0xFF0000 })
 const c2 = new THREE.Mesh(g, m2);
-c2.position.x = 5;
-c2.position.y = 2;
-c2.position.z = -6;
+c2.position.x = 37;
+c2.position.y = -22;
+c2.position.z = 21.87;
 scene.add(c2);
 
 
-const cat1 = Math.pow((c2.position.x ))
-const d = Math.sqrt() - 2;
-const dd = Math.sqrt(Math.pow(d, 2) + Math.pow(c2.position.z, 2)); 
+const calc = Math.pow(c2.position.x - c1.position.x, 2) + Math.pow(c2.position.y - c1.position.y, 2);
+const d = Math.sqrt(calc) - 2;
+const h = c2.position.z - c1.position.z;
+const dd = Math.sqrt(Math.pow(d, 2) + Math.pow(h, 2)); 
 const a = Math.atan2((c2.position.y - c1.position.y), (c2.position.x - c1.position.x))
-const i = Math.atan(c2.position.z / d);
+const i = Math.atan(h / d);
 const pg = new THREE.PlaneGeometry(1, dd);
 const m3 = new THREE.MeshBasicMaterial({ color : 0x0000FF, side : THREE.DoubleSide });
 const p = new THREE.Mesh(pg, m3);

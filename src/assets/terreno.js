@@ -22,7 +22,7 @@ export default class Terreno {
         for(let i = 0; i < 1; i ++) {
             let x0 = 0.0, y0 = 0.0, orientacao;
             if(i == 0) {
-                orientacao = THREE.MathUtils.radToDeg(2.468640924607367);
+                orientacao = THREE.MathUtils.radToDeg(-0.5880026035475678);
             } else if(i == 1) {
                 orientacao = -90;
             } else if(i == 2) {
