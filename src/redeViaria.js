@@ -12,8 +12,9 @@ const cameraParameters = {
     far : 1000
 };
 const camera = new THREE.PerspectiveCamera(cameraParameters.fieldOfView, cameraParameters.aspectRatio, cameraParameters.near, cameraParameters.far);
-camera.position.set(0, -100, 100);
+camera.position.set(23, -50, 30);
 camera.rotation.x = cameraParameters.fieldOfView * (Math.PI / 180);
+camera.up.set(0, 0, 1);
 scene.add(camera);
 
 //TODO: Criar os terrenos pelo uso da lista recebida da Gestão de Armazéns
@@ -27,16 +28,16 @@ scene.add(camera);
 const terrenoParameters = {
     tamanho : 1,
     segmentos : 64,
-    x : 24.3898,
-    y : -24.9214,
+    x : 24,
+    y : -24,
     z : 0,
     cor : 0x228B22
 };
 const terrenoParameters1 = {
     tamanho : 1,
     segmentos : 64,
-    x : 21.0384,
-    y : -27.5927,
+    x : 22,
+    y : -27,
     z : 0,
     cor : 0x228B22
 };
@@ -59,46 +60,26 @@ scene.add(terreno1.object);
 
 
 const comprimentoXY = Math.sqrt(Math.pow(terrenoParameters1.x - terrenoParameters.x, 2) + 
-    Math.pow(terrenoParameters1.y - terrenoParameters.y, 2)) - estradaParameters.comprimento - estradaParameters.comprimento;
+    Math.pow(terrenoParameters1.y - terrenoParameters.y, 2)) - (terrenoParameters.tamanho) - (terrenoParameters1.tamanho);
 const desnivel = terrenoParameters1.z - terrenoParameters.z;
 const comprimento = Math.sqrt(Math.pow(comprimentoXY, 2) + Math.pow(desnivel, 2));
 const inclinacao = Math.atan(desnivel / comprimentoXY);
 const orientacao = Math.atan2((terrenoParameters1.y - terrenoParameters.y), (terrenoParameters1.x - terrenoParameters.x));
-console.log(orientacao);
 const rampaGeometry = new THREE.PlaneGeometry(estradaParameters.largura, comprimento);
-const rampaMaterial = new THREE.MeshBasicMaterial({ color : estradaParameters.cor });
+const rampaMaterial = new THREE.MeshBasicMaterial({ color : estradaParameters.cor, side : THREE.DoubleSide });
+rampaMaterial.depthTest = false;
 const rampa = new THREE.Mesh(rampaGeometry, rampaMaterial);
 rampa.position.x = (terrenoParameters1.x + terrenoParameters.x) / 2;
 rampa.position.y = (terrenoParameters1.y + terrenoParameters.y) / 2;
 rampa.position.z = (terrenoParameters1.z + terrenoParameters.z) / 2;
-rampa.rotateY(orientacao);
-console.log(-orientacao);
-console.log(rampa.position);
-console.log(rampa.rotation);
+rampa.rotateZ(-orientacao);
+//rampa.rotateY(inclinacao);
 scene.add(rampa);
-
-/*
-const rampaShape = new THREE.Shape();
-const x1 = terrenoParameters.x + estradaParameters.largura;
-const y1 = terrenoParameters.y + comprimento;
-rampaShape.moveTo(terrenoParameters.x, terrenoParameters.y);
-rampaShape.lineTo(terrenoParameters.x, y1);
-rampaShape.lineTo(x1, y1);
-rampaShape.lineTo(x1, terrenoParameters.y);
-rampaShape.lineTo(terrenoParameters.x, terrenoParameters.y);
-const rampaGeometry = new THREE.ShapeGeometry(rampaShape);
-const rampaMaterial = new THREE.MeshBasicMaterial({ color : estradaParameters.cor, side : THREE.DoubleSide, depthWrite : false });
-rampaMaterial.depthTest = false;
-const rampa = new THREE.Mesh(rampaGeometry, rampaMaterial);
-rampa.position.z = terrenoParameters.z;
-const inclinacao = Math.atan(desnivel / comprimentoXY);
-const orientacao = Math.atan2((terrenoParameters1.y - terrenoParameters.y)/(terrenoParameters1.x - terrenoParameters.x),0);
-console.log(orientacao);
-console.log(inclinacao);
-rampa.rotateZ(orientacao);
-rampa.position.set(terrenoParameters.x, terrenoParameters.y, terrenoParameters.z);
-scene.add(rampa);*/
-
+console.log("A(" + terrenoParameters.x + "; " + terrenoParameters.y + "; " + terrenoParameters.z + ")");
+console.log("B(" + terrenoParameters1.x + "; " + terrenoParameters1.y + "; " + terrenoParameters1.z + ")");
+console.log("Comprimento xOy: " + comprimentoXY);
+console.log("Comprimento: " + comprimento);
+console.log("Orientação: " + orientacao);
 
 
 
