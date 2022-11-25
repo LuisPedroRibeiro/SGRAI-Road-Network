@@ -43,12 +43,9 @@ const i = Math.atan(h / d);
 const pg = new THREE.PlaneGeometry(1, dd);
 const m3 = new THREE.MeshBasicMaterial({ color : 0x0000FF, side : THREE.DoubleSide });
 const p = new THREE.Mesh(pg, m3);
-
 p.position.x = (c2.position.x + c1.position.x) / 2;
 p.position.y = (c2.position.y + c1.position.y) / 2;
 p.position.z = (c2.position.z + c1.position.z) / 2;
-
-//p.rotateZ(THREE.MathUtils.degToRad(90));
 p.rotateZ(THREE.MathUtils.degToRad(90) + a);
 p.rotateX(-i);
 scene.add(p);
