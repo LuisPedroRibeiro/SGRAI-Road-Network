@@ -1,5 +1,8 @@
+import { OrbitControls } from "../node_modules/three/examples/jsm/controls/OrbitControls.js";
 import * as THREE from "../three.js-master/build/three.module.js";
 import Terreno from "./assets/terreno.js";
+
+
 
 const scene = new THREE.Scene();
 
@@ -83,10 +86,36 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+const controls = new OrbitControls(camera,renderer.domElement);
+controls.enabled = true;
+camera.position.set( 10, 10, 80 );
+controls.update();
+
+controls.target.set(20,0,20);
+
+controls.panSpeed = 0.8;
+controls.zoomSpeed = 1.1;
+controls.rotateSpeed = 0.9;
+controls.minDistance = 5;
+controls.maxDistance = 100;
+
+/*const MOUSE = { LEFT: 0, MIDDLE: 1, RIGHT: 2, ROTATE: 0, DOLLY: 1, PAN: 2 };
+controls.mouseButtons = { LEFT: MOUSE.PAN, MIDDLE: MOUSE.DOLLY, RIGHT: MOUSE.ROTATE };*/ //troca o botão do rato do pan com o do rotate em relação ao default
+
+controls.enablePan = true; //só mudar para false para desativar cada opção
+controls.enableRotate = true;
+controls.enableZoom = true;
+
+controls.maxPolarAngle = Math.PI /2;
+
+controls.enableDamping = false; //efeito de gravidade, mudar para true ativa
+controls.dampingFactor = 0.01;
+
 
 
 animate();
 function animate() {
     requestAnimationFrame(animate);
+    controls.update();
     renderer.render(scene, camera);
 }
