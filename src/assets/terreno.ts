@@ -3,6 +3,8 @@ import Rotunda from "./rotunda.js";
 import Estrada from "./estrada.js";
 
 export default class Terreno {
+    public object;
+
     constructor(terrenoParameters, rotundaParameters, estradaParameters) {
         const terrenoGeometry = new THREE.CircleGeometry(terrenoParameters.tamanho, terrenoParameters.segmentos);
         const terrenoMaterial = new THREE.MeshBasicMaterial({ color: terrenoParameters.cor });

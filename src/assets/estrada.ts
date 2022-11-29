@@ -1,6 +1,8 @@
 import * as THREE from "../../three.js-master/build/three.module.js";
 
 export default class Estrada {
+    public object;
+
     constructor(estradaParameters, rotundaParameters, x0, y0, orientacao) {
         let x1, x2, y1, y2;
         x1 = x0 - (estradaParameters.largura / 2);

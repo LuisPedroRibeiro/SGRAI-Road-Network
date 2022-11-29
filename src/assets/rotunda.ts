@@ -1,7 +1,9 @@
 import * as THREE from "../../three.js-master/build/three.module.js";
 
 export default class Rotunda {
-    constructor(rotundaParameters, rotundaLinhasExterioresParameters, rotundaLinhasInterioresParameters) {
+    public object;
+
+    constructor(rotundaParameters) {
         this.criarRotunda(rotundaParameters);
         //this.criarLinhasExteriores(rotundaLinhasExterioresParameters);
         //this.criarLinhasInteriores(rotundaLinhasInterioresParameters);
